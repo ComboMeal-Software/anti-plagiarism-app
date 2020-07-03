@@ -17,5 +17,17 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
-  }
+  },
+  "description": "Прототип системы для анализа программ на плагиат",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ComboMeal-Software/anti-plagiarism-app.git"
+  },
+  "author": "ComboMeal-Software",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ComboMeal-Software/anti-plagiarism-app/issues"
+  },
+  "homepage": "https://github.com/ComboMeal-Software/anti-plagiarism-app#readme"
 }
