@@ -1,8 +1,10 @@
 
 exports.homePage = (req, res, next) => {
-    res.render('index', { title: 'Anti-Plagiarism System' });
+    result = " ";
+    res.render('index', { title: 'Anti-Plagiarism System', result });
 };
 
 exports.homePageResult = (req, res, next) => {
-    res.render('index', { title: 'Anti-Plagiarism System' });
+    result = " ";
+    res.render('index', { title: 'Anti-Plagiarism System', result });
 };
