@@ -1,8 +1,83 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px "Lato", "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin:0;
+  background-color: #f9f9f9
 }
-
+*{
+  box-sizing: border-box;
+}
 a {
   color: #00B7FF;
+}
+.header{
+  position: relative;
+  left:20%;
+  width:60%;
+  text-align:center;
+  color:#40434c;
+  overflow:auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main{
+  width:90%;
+  position: relative;
+  left:5%;
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+  top:30px;
+}
+.form_input{
+  width:40%;
+}
+.form_input.button_input{
+  text-align:center;
+  width: fit-content;
+  margin:auto;
+}
+.form_textarea{
+  min-width:100%;
+  height:100%;
+  border-radius: 15px;
+  border:none;
+  min-height: 50vh;
+  padding:20px;
+  color:#fff;
+  background-color: #40434C;
+}
+.compare_button{
+  border: none;
+  background: #47CF73;
+  width: 200px;
+  height: 50px;
+  cursor:pointer;
+  font-size: 24px;
+  color:#fff;
+}
+.button{
+  border: none;
+  border-radius: 15px;
+  cursor:pointer;
+}
+.form_textarea::placeholder{
+  color:#ffffff94;
+}
+.theme_button{
+  padding-left:15px;
+  padding-right:15px;
+  min-height:40px;
+  min-width:150px;
+  background-color:#40434c;
+  color:#f9f9f9;
+  font-size:15px;
+  line-height: 25px;
+  float:right;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+button:focus{
+  border:none;
+  outline: none;
 }
