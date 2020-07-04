@@ -1,7 +1,7 @@
 body {
   font: 14px "Lato", "Lucida Grande", Helvetica, Arial, sans-serif;
   margin:0;
-  background-color: #f3f3f3
+  background-color: #40434c26
 }
 *{
   box-sizing: border-box;
@@ -14,7 +14,7 @@ a {
   left:20%;
   width:60%;
   text-align:center;
-  color:#40434c;
+  color:#222429;
   overflow:auto;
   display: flex;
   justify-content: space-between;
@@ -44,7 +44,7 @@ a {
   border:none;
   min-height: 50vh;
   padding:20px;
-  color:#9fa9c9;
+  color:#222429;
   background-color: #fff;
 }
 .form_textarea::placeholder{
