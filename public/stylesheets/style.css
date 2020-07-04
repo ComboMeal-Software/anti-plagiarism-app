@@ -81,3 +81,7 @@ button:focus{
   border:none;
   outline: none;
 }
+textarea:focus{
+  border:none;
+  outline: none;
+}
