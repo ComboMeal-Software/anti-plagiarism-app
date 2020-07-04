@@ -1,14 +1,15 @@
 extends layout
 
 block content
-  form(action="" method="POST")
-    .form_input
-      textarea(name="first", cols="90", rows="50" required) Исходный код первой программы
-    .form_input
-      button(type="submit") Сравнить
-    .form_input
-      textarea(name="second", cols="90", rows="50" required) Исходный код второй программы
-  
-  if result.length > 1
-    .result_wrapper
-      p= result
+    form(class="main" action="" method="POST")
+      .form_input
+        textarea(name="first", class="form_textarea" required placeholder="Введите исходный код первой программы")
+      .form_input.button_input
+        button.compare_button.button(type="submit") Сравнить
+      .form_input
+        textarea(name="second", class="form_textarea" required placeholder="Введите исходный код второй программы")
+    
+    if result.length > 1
+      .result_wrapper
+        p= result
+    script(type="text/javascript" src="/js/theme.js")
