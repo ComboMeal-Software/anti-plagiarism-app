@@ -9,8 +9,8 @@ theme_button.addEventListener('click', (event) => {
     theme_button.innerText = "Темная тема";
     textarea.forEach((area) => { area.classList.remove('textarea_light') })
     theme_button.style = "background-color: #40434c; color:#f9f9f9;"
-    header.style = 'color:#40434c'
-    body.style = 'background-color: #f9f9f9'
+    header.style = 'color:#222429'
+    body.style = 'background-color: #40434c26'
   } else {
     theme = 'light'
     theme_button.innerText = "Светлая тема";
