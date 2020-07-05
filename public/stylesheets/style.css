@@ -66,13 +66,48 @@ a {
   cursor:pointer;
   font-size: 24px;
   color:#fff;
-  margin-bottom:25px;;
+  position: relative;
+}
+.compare_button_block{
+  font-size: 24px;
+  border-radius: 15px;
+  color:#fff;
+  margin-bottom:25px;
+  position: relative;
+  overflow: hidden;
+}
+.compare_button_block .plagiarized{
+  transition: width .2s ease-in-out;
+  width:0;
+  position: absolute;
+  left:0;
+  top:0;
+  border-radius: inherit;
+  background-color: #ff6b6b;
+  height:100%;
+  overflow: hidden;
+}
+.compare_button_block .plagiarized span{
+  position: relative;
+  top: calc(50% - 14px);
+}
+.compare_button_block .refresh {
+  cursor:pointer;
+  transition: right .2s ease-in-out;
+  position: absolute;
+  font-size:36px;
+  top:calc(50% - 18px);
+  right:-50px;
+  padding-right:5px;
+  overflow: hidden;
+  min-width: 41px;
 }
 .button{
   border: none;
   border-radius: 15px;
   cursor:pointer;
   padding:5px;
+  overflow:hidden;
 }
 
 .theme_button{
