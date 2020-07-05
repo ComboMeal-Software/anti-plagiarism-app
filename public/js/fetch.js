@@ -1,4 +1,4 @@
-const form = document.querySelector('.main')
+const buttons = document.querySelectorAll('.compare_button')
 const first = document.querySelectorAll('.form_textarea')[0]
 const second = document.querySelectorAll('.form_textarea')[1]
 let method = 'POST'
@@ -6,7 +6,6 @@ let headers = {}
 buttons.forEach((button) => {
   button.addEventListener('click', async (event) => {
     event.preventDefault()
-    console.log(button)
     const body = JSON.stringify({
       first: first.value,
       second: second.value,

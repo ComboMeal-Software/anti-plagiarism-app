@@ -3,10 +3,11 @@ extends layout
 block content
     form(class="main" action="" method="POST")
       .form_input
-        textarea(name="first", class="form_textarea" required placeholder="Введите исходный код первой программы")
+        textarea(data-autoresize name="first" class="form_textarea" required placeholder="Введите исходный код первой программы")
       .form_input.button_input
         div.compare_button_block
           button.compare_button.button#leven Алгоритм Вагнера-Фишера
+<<<<<<< HEAD
           div.plagiarized
             span
           div.refreshBlock
@@ -17,11 +18,19 @@ block content
             span 
           div.refreshBlock
             i.material-icons.refresh close
+=======
+          div.plagiarized 
+            span 
+          i.material-icons.refresh close
+        button.compare_button.button#shilling W-shilling
+>>>>>>> 431797ef2e8450c8612e8aebabb48a2039ce706d
       .form_input
-        textarea(name="second", class="form_textarea" required placeholder="Введите исходный код второй программы")
+        textarea(data-autoresize name="second" class="form_textarea" required placeholder="Введите исходный код второй программы")
     
     if result.length > 1
       .result_wrapper
         p= result
     script(type="text/javascript" src="/js/theme.js")
+    script(type="text/javascript" src="/js/showResults.js")
     script(type="text/javascript" src="/js/fetch.js")
+    script(type="text/javascript" src="/js/autoresize.js")
