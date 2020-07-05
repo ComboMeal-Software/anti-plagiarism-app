@@ -20,7 +20,7 @@ buttons.forEach((button) => {
     const status = response.status;
     const data = await response.json()
     if (status === 200) {
-      showResults(button.parentElement, data.result.value)
+      showResults(button.parentElement, Math.round(data.result.value))
     }
     if (!response.ok) {
       throw new Error('Что-то пошло не так')
