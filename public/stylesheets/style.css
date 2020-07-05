@@ -108,6 +108,7 @@ a {
   margin-right:5px;
   right:-50px;
   overflow: hidden;
+  text-align: end;
 }
 .button{
   border: none;

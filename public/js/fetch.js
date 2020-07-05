@@ -37,7 +37,6 @@ buttons.forEach((button) => {
     button.innerText = text;
   }
   refresh.addEventListener('click', (event) => {
-    console.log(text);
     refreshFunction()
   }, true)
 
