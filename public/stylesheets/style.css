@@ -66,7 +66,48 @@ a {
   cursor:pointer;
   font-size: 24px;
   color:#fff;
-  margin-bottom:25px;;
+  position: relative;
+}
+.compare_button_block{
+  font-size: 24px;
+  border-radius: 15px;
+  color:#fff;
+  margin-bottom:25px;
+  position: relative;
+  overflow: hidden;
+}
+.compare_button_block .plagiarized{
+  transition: all .2s ease-in-out;
+  width:0;
+  position: absolute;
+  left:-60px;
+  top:0;
+  border-radius: inherit;
+  background-color: #ff6b6b;
+  height:100%;
+  min-width: 60px;
+  overflow: hidden;
+}
+.compare_button_block .plagiarized span{
+  position: relative;
+  top: calc(50% - 14px);
+}
+.compare_button_block .refresh {
+  padding: 3px;
+  border-radius: 50%;
+  background: #47cf73;
+  cursor:pointer;
+  font-size:36px;
+}
+.compare_button_block .refreshBlock{
+  transition: right .2s ease-in-out;
+  position: absolute;
+  top:calc(50% - 22px);
+  min-width: 41px;
+  max-width:calc(100% - 60px);
+  margin-right:5px;
+  right:-50px;
+  overflow: hidden;
 }
 .button{
   border: none;

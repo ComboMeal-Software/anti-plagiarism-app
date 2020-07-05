@@ -5,7 +5,18 @@ block content
       .form_input
         textarea(name="first", class="form_textarea" required placeholder="Введите исходный код первой программы")
       .form_input.button_input
-        button.compare_button.button(type="submit") Сравнить
+        div.compare_button_block
+          button.compare_button.button#leven Алгоритм Вагнера-Фишера
+          div.plagiarized
+            span
+          div.refreshBlock
+            i.material-icons.refresh close
+        div.compare_button_block
+          button.compare_button.button#shingling W-shingling
+          div.plagiarized 
+            span 
+          div.refreshBlock
+            i.material-icons.refresh close
       .form_input
         textarea(name="second", class="form_textarea" required placeholder="Введите исходный код второй программы")
     
