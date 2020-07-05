@@ -103,10 +103,12 @@ a {
   transition: right .2s ease-in-out;
   position: absolute;
   top:calc(50% - 22px);
-  width: 41px;
+  min-width: 41px;
+  max-width:calc(100% - 60px);
   margin-right:5px;
   right:-50px;
   overflow: hidden;
+  text-align: end;
 }
 .button{
   border: none;
