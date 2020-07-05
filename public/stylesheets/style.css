@@ -93,16 +93,21 @@ a {
   top: calc(50% - 14px);
 }
 .compare_button_block .refresh {
+  padding: 3px;
+  border-radius: 50%;
+  background: #47cf73;
   cursor:pointer;
+  font-size:36px;
+}
+.compare_button_block .refreshBlock{
   transition: right .2s ease-in-out;
   position: absolute;
-  font-size:36px;
-  top:calc(50% - 18px);
-  right:-50px;
-  padding-right:5px;
-  overflow: hidden;
+  top:calc(50% - 22px);
   min-width: 41px;
-  max-width:calc(100% - 60px)
+  max-width:calc(100% - 60px);
+  margin-right:5px;
+  right:-50px;
+  overflow: hidden;
 }
 .button{
   border: none;
