@@ -26,4 +26,19 @@ buttons.forEach((button) => {
       throw new Error('Что-то пошло не так')
     }
   })
+  const block = button.parentElement
+  const text = button.innerText;
+  const refresh = block.querySelector('.refreshBlock')
+  const plagiarized = block.querySelector('.plagiarized')
+  const refreshFunction = () => {
+    refresh.style = ''
+    plagiarized.style = ''
+    button.style = ''
+    button.innerText = text;
+  }
+  refresh.addEventListener('click', (event) => {
+    console.log(text);
+    refreshFunction()
+  }, true)
+
 })
