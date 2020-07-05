@@ -7,5 +7,5 @@ const showResults = (block, result) => {
   button.innerText = ''
   plagiarized.querySelector('span').innerText = `${result}%`
   plagiarized.style = `left: 0; width: ${result}%;`
-  refresh.style = `right:0; width: ${100 - result}%;`
+  refresh.style = 'right:0;'
 }
