@@ -24,8 +24,7 @@ router.post('/shingling', (req, res) => {
     second,
   } = req.body;
   try {
-    const result = shingle.getShingle(first, second);
-    
+    const result = shingle.getShingle(first, second, 6);
     res.status(200).json({
       result,
     });
