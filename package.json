@@ -7,8 +7,11 @@
     "devstart": "nodemon ./bin/www"
   },
   "dependencies": {
+    "array-intersection": "^0.1.2",
+    "array-union": "^2.1.0",
     "clean-css": "^4.2.3",
     "cookie-parser": "~1.4.4",
+    "crc-32": "^1.2.0",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
