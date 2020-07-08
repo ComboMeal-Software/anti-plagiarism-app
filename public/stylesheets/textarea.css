@@ -16,12 +16,7 @@
 .form_input.textareaBlock:focus-within{
   border: 1px solid #47cf73;
 }
-.form_textarea::-webkit-scrollbar {
-  cursor: pointer;
-  background:#fff;
-  border-radius: 15px;
-  width:5px;
-}
+
 .form_textarea::-webkit-scrollbar {
   background:#fff;
   border-radius: 15px;
