@@ -42,6 +42,5 @@ exports.getShingle = (first, second, N) => {
       method: 'shingling',
       value: plagiarized,
     }
-    console.log(result);
     return result;
   }

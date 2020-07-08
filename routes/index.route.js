@@ -1,10 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-const appController = require('../controllers/appController');
-
 /* GET home page. */
-router.get('/', appController.homePage);
-router.post('/', appController.homePageResult);
+router.get('/', (req, res, next) => {
+    res.render('index');
+});
+router.post('/', (req, res, next) => {
+    res.render('index');
+});
 
 module.exports = router;
