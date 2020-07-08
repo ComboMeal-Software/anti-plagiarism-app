@@ -7,7 +7,7 @@
   background-color: #fff;
   resize: none;
 }
-.form_input.textareaBlock{
+.textareaBlock{
   padding: 7px 2px 5px 15px;
   border-radius: 15px;
   overflow: auto;
@@ -17,11 +17,23 @@
   border: 1px solid #47cf73;
 }
 .form_textarea::-webkit-scrollbar {
+  cursor: pointer;
   background:#fff;
   border-radius: 15px;
   width:5px;
 }
-
+.form_textarea::-webkit-scrollbar {
+  cursor: pointer;
+  background:#fff;
+  border-radius: 15px;
+  width:5px;
+}
+.form_textarea.textarea_light::-webkit-scrollbar {
+  cursor: pointer;
+  background:#40434C;
+  border-radius: 15px;
+  width:5px;
+} 
 .form_textarea::-webkit-scrollbar-thumb {
   background:#47cf73a6;
   border-radius: 15px;
@@ -29,7 +41,7 @@
 .form_textarea::placeholder{
   color:#40434c75;
 }
-.form_textarea.textarea_light{
+.textarea_light{
   background-color: #40434C;
   color:#fff;
 }
