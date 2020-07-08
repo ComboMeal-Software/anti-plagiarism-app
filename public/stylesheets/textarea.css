@@ -1,0 +1,43 @@
+.form_textarea{
+  min-width: 100%;
+  padding-top: 8px;
+  border: none;
+  min-height: 75vh;
+  color: #222429;
+  background-color: #fff;
+  resize: none;
+  overflow-x: hidden;
+}
+.form_input.textareaBlock{
+  padding: 7px 2px 5px 15px;
+  border-radius: 15px;
+  overflow: auto;
+  background-color: #fff;
+}
+.form_input.textareaBlock:focus-within{
+  border: 1px solid #47cf73;
+}
+.form_textarea::-webkit-scrollbar {
+  background: #fff;
+  border-radius: 15px;
+  width: 5px;
+}
+
+.form_textarea::-webkit-scrollbar-thumb {
+  background: #47cf73a6;
+  border-radius: 15px;
+}
+.form_textarea::placeholder{
+  color: #40434c75;
+}
+.form_textarea.textarea_light{
+  background-color: #40434C;
+  color: #fff;
+}
+.textarea_light::placeholder{
+  color: #ffffff94;
+}
+textarea:focus{
+  border: none;
+  outline: none;
+}

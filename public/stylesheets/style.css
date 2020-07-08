@@ -1,7 +1,7 @@
 body {
   font: 14px "Lato", "Lucida Grande", Helvetica, Arial, sans-serif;
-  margin:0;
-  background-color: #f9f9f9
+  margin: 0;
+  background-color: #40434c26;
 }
 *{
   box-sizing: border-box;
@@ -11,73 +11,110 @@ a {
 }
 .header{
   position: relative;
-  left:20%;
-  width:60%;
-  text-align:center;
-  color:#40434c;
-  overflow:auto;
+  left: 25%;
+  width: 60%;
+  text-align: center;
+  color: #222429;
+  overflow: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .main{
-  width:90%;
+  width: 90%;
   position: relative;
-  left:5%;
-  display:flex;
+  left: 5%;
+  display: flex;
   justify-content: space-around;
-  align-items: center;
-  top:30px;
+  align-items: flex-start;
+  top: 30px;
 }
 .form_input{
   width:40%;
 }
 .form_input.button_input{
-  text-align:center;
+  text-align: center;
   width: fit-content;
-  margin:auto;
+  margin: auto;
+  margin-top: 5%;
 }
-.form_textarea{
-  min-width:100%;
-  height:100%;
-  border-radius: 15px;
-  border:none;
-  min-height: 50vh;
-  padding:20px;
-  color:#fff;
-  background-color: #40434C;
-}
+
 .compare_button{
   border: none;
   background: #47CF73;
   width: 200px;
-  height: 50px;
-  cursor:pointer;
+  min-height: 50px;
+  cursor: pointer;
   font-size: 24px;
-  color:#fff;
+  color: #fff;
+  position: relative;
+}
+.compare_button_block{
+  font-size: 24px;
+  border-radius: 15px;
+  color: #fff;
+  margin-bottom: 25px;
+  position: relative;
+  overflow: hidden;
+}
+.compare_button_block .plagiarized{
+  transition: all .2s ease-in-out;
+  width: 0;
+  position: absolute;
+  left: -60px;
+  top: 0;
+  border-radius: inherit;
+  background-color: #ff6b6b;
+  height: 100%;
+  min-width: 60px;
+  overflow: hidden;
+}
+.compare_button_block .plagiarized span{
+  position: relative;
+  top: calc(50% - 14px);
+}
+.compare_button_block .refresh {
+  padding: 3px;
+  border-radius: 50%;
+  background: #47cf73;
+  cursor: pointer;
+  font-size: 36px;
+}
+.compare_button_block .refreshBlock{
+  transition: right .2s ease-in-out;
+  position: absolute;
+  top: calc(50% - 22px);
+  min-width: 41px;
+  max-width: calc(100% - 60px);
+  margin-right: 5px;
+  right: -50px;
+  overflow: hidden;
+  text-align: end;
 }
 .button{
   border: none;
   border-radius: 15px;
-  cursor:pointer;
+  cursor: pointer;
+  padding: 5px;
+  overflow: hidden;
 }
-.form_textarea::placeholder{
-  color:#ffffff94;
-}
+
 .theme_button{
-  padding-left:15px;
-  padding-right:15px;
-  min-height:40px;
-  min-width:150px;
-  background-color:#40434c;
-  color:#f9f9f9;
-  font-size:15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  min-height: 40px;
+  min-width: 150px;
+  background-color: #40434c;
+  color: #f9f9f9;
+  font-size: 15px;
   line-height: 25px;
-  float:right;
+  float: right;
   font-weight: bold;
   letter-spacing: 1px;
 }
+
 button:focus{
-  border:none;
+  border: none;
   outline: none;
 }
