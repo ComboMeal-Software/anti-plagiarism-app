@@ -38,27 +38,7 @@ a {
   width: fit-content;
   margin:auto;
 }
-.form_textarea{
-  min-width:100%;
-  border-radius: 15px;
-  border:none;
-  min-height: 50vh;
-  padding:20px;
-  color:#222429;
-  background-color: #fff;
-  resize: none;
-  overflow:hidden;
-}
-.form_textarea::placeholder{
-  color:#40434c75;
-}
-.form_textarea.textarea_light{
-  background-color: #40434C;
-  color:#fff;
-}
-.textarea_light::placeholder{
-  color:#ffffff94;
-}
+
 .compare_button{
   border: none;
   background: #47CF73;
@@ -135,9 +115,5 @@ a {
 
 button:focus{
   border:none;
-  outline: none;
-}
-textarea:focus{
-  border: 1px solid #47cf73;
   outline: none;
 }

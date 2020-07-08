@@ -2,7 +2,7 @@ extends layout
 
 block content
     form(class="main" action="" method="POST")
-      .form_input
+      .form_input.textareaBlock
         textarea(data-autoresize name="first" class="form_textarea" required placeholder="Введите исходный код первой программы")
       .form_input.button_input
         div.compare_button_block
@@ -17,7 +17,7 @@ block content
             span 
           div.refreshBlock
             i.material-icons.refresh close
-      .form_input
+      .form_input.textareaBlock
         textarea(data-autoresize name="second" class="form_textarea" required placeholder="Введите исходный код второй программы")
     
     if result.length > 1
@@ -26,4 +26,3 @@ block content
     script(type="text/javascript" src="/js/theme.js")
     script(type="text/javascript" src="/js/showResults.js")
     script(type="text/javascript" src="/js/fetch.js")
-    script(type="text/javascript" src="/js/autoresize.js")
