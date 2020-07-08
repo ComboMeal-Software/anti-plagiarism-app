@@ -23,13 +23,11 @@
   width:5px;
 }
 .form_textarea::-webkit-scrollbar {
-  cursor: pointer;
   background:#fff;
   border-radius: 15px;
   width:5px;
 }
 .form_textarea.textarea_light::-webkit-scrollbar {
-  cursor: pointer;
   background:#40434C;
   border-radius: 15px;
   width:5px;
