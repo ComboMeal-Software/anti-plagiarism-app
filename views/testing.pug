@@ -1,0 +1,9 @@
+extends layout
+
+block content
+    form(action="/files/leven" method="POST" enctype="multipart/form-data")
+            .form_input
+                label(for="image") Source code:
+                input(type="file" name="files" id="files" webkitdirectory mozdirectory)
+            .form_input
+                button(type="submit" class="button_small") Confirm
