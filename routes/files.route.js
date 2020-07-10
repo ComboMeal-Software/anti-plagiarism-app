@@ -46,7 +46,7 @@ const filter = (req, file, cb) => {
 
 const upload = multer({ storage: storage });
 
-router.post('/leven', upload.fields([{ name: 'first-folder', maxCount: 100 }, { name: 'second-folder', maxCount: 100 }]), async (req, res) => {
+router.post('/leven', upload.fields([{ name: 'first-folder', maxCount: 100 }, { name: 'second-folder', maxCount: 100 }]), (req, res) => {
     try {
         console.log('files uploaded');
         let filePath = '';
@@ -70,11 +70,10 @@ router.post('/leven', upload.fields([{ name: 'first-folder', maxCount: 100 }, { 
                 results.push({
                     firstFolderFile: firstFolderFiles.name,
                     secondFolderFile: secondFolderFiles.name,
-                    value: leven.getLeven(firstFolderFiles.source, secondFolderFiles.source)
+                    plagiarized: leven.getLeven(firstFolderFiles.source, secondFolderFiles.source)
                 })
             })
         })
-        console.table(results);
         res.status(200).send(results);
     } catch (e) {
         res.status(500);
