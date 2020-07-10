@@ -3,11 +3,12 @@ const CRC32 = require('crc-32');
 const intersection = require('array-intersection');
 const union = require('array-union');
 
-exports.getShingle = (first, second, N) => {
-    const tokens = token.getTokens(first, second);
+exports.getShingle = (...contents) => {
+    shingleLength = 5;
+    const tokens = token.getTokens(contents);
     let firstShingles = [];
-    for (let i = 0; i + N <= tokens[0].length; i++) {
-      firstShingles.push(tokens[0].substr(i, N));
+    for (let i = 0; i + shingleLength <= tokens[0].length; i++) {
+      firstShingles.push(tokens[0].substr(i, shingleLength));
     }
     let firstHash = [];
     firstShingles.forEach(function(item, i, arr) {
@@ -15,8 +16,8 @@ exports.getShingle = (first, second, N) => {
     })
 
     let secondShingles = [];
-    for (let i = 0; i + N <= tokens[1].length; i++) {
-      secondShingles.push(tokens[1].substr(i, N));
+    for (let i = 0; i + shingleLength <= tokens[1].length; i++) {
+      secondShingles.push(tokens[1].substr(i, shingleLength));
     }
     let secondHash = [];
     secondShingles.forEach(function(item, i, arr) {

@@ -2,7 +2,7 @@ const Tokenizr = require('tokenizr');
 const c_rules = require('../tokenRules/c-tokenizer')
 
 let lexer = new Tokenizr()
-exports.getTokens = (...strings) => {
+exports.getTokens = (contents) => {
     c_rules.forEach((c_rule) => {
         lexer.rule(c_rule.regex, (ctx, match) => {
         if (c_rule.type.length) {
@@ -12,14 +12,14 @@ exports.getTokens = (...strings) => {
         }
         });
     });
-    const tokens = strings.map((string) => {
-        lexer.input(string.toLowerCase());
+    const tokens = contents.map((content) => {
+        lexer.input(content.toLowerCase());
         lexer.debug(false);
-        let stringToken = '';
+        let contentToken = '';
         lexer.tokens().forEach((token) => {
-            stringToken += token.type.toString();
+            contentToken += token.type.toString();
         });
-        return stringToken;
+        return contentToken;
     });
     return tokens;
 };
