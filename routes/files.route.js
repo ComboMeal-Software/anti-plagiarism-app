@@ -53,14 +53,14 @@ router.post('/leven', upload.fields([{ name: 'first-folder', maxCount: 100 }, { 
         const sourcesFirst = req.files['first-folder'].map((file) => {
             filePath = path.join(__dirname, '../', file.path);
             return {
-                name: file.filename,
+                name: file.originalname,
                 source: readFileSync(filePath, 'utf8')
             };
         });
         const sourcesSecond = req.files['second-folder'].map((file) => {
             filePath = path.join(__dirname, '../', file.path);
             return {
-                name: file.filename,
+                name: file.originalname,
                 source: fs.readFileSync(filePath, 'utf8')
             };
         })
@@ -89,14 +89,14 @@ router.post('/shingling', upload.fields([{ name: 'first-folder', maxCount: 100 }
         const sourcesFirst = req.files['first-folder'].map((file) => {
             filePath = path.join(__dirname, '../', file.path);
             return {
-                name: file.filename,
+                name: file.originalname,
                 source: readFileSync(filePath, 'utf8')
             };
         });
         const sourcesSecond = req.files['second-folder'].map((file) => {
             filePath = path.join(__dirname, '../', file.path);
             return {
-                name: file.filename,
+                name: file.originalname,
                 source: fs.readFileSync(filePath, 'utf8')
             };
         })
