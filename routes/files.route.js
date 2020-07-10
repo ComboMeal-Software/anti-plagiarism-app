@@ -67,11 +67,15 @@ router.post('/leven', upload.fields([{ name: 'first-folder', maxCount: 100 }, { 
         let results = new Array()
         sourcesFirst.forEach((firstFolderFiles) => {
             sourcesSecond.forEach((secondFolderFiles) => {
-                results.push([firstFolderFiles.name, secondFolderFiles.name, leven.getLeven(firstFolderFiles.source, secondFolderFiles.source)]);
+                results.push({
+                    firstFolderFile: firstFolderFiles.name,
+                    secondFolderFile: secondFolderFiles.name,
+                    value: leven.getLeven(firstFolderFiles.source, secondFolderFiles.source)
+                })
             })
         })
         console.table(results);
-        res.send('end');
+        res.status(200).send(results);
     } catch (e) {
         res.status(500);
         console.log(e);
@@ -99,11 +103,14 @@ router.post('/shingling', upload.fields([{ name: 'first-folder', maxCount: 100 }
         let results = new Array()
         sourcesFirst.forEach((firstFolderFiles) => {
             sourcesSecond.forEach((secondFolderFiles) => {
-                results.push([firstFolderFiles.name, secondFolderFiles.name, shingle.getShingle(firstFolderFiles.source, secondFolderFiles.source)]);
+                results.push({
+                    firstFolderFile: firstFolderFiles.name,
+                    secondFolderFile: secondFolderFiles.name,
+                    value: shingle.getShingle(firstFolderFiles.source, secondFolderFiles.source)
+                });
             })
         })
-        console.table(results);
-        res.send('end');
+        res.status(200).send(results);
     } catch (e) {
         res.status(500);
         console.log(e);
