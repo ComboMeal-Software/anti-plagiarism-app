@@ -105,7 +105,7 @@ router.post('/shingling', upload.fields([{ name: 'first-folder', maxCount: 100 }
                 results.push({
                     firstFolderFile: firstFolderFiles.name,
                     secondFolderFile: secondFolderFiles.name,
-                    value: shingle.getShingle(firstFolderFiles.source, secondFolderFiles.source)
+                    plagiarized: shingle.getShingle(firstFolderFiles.source, secondFolderFiles.source)
                 });
             })
         })

@@ -1,4 +1,5 @@
 function showFilesResults (results, ResultTable) {
+  ResultTable.style="opacity:1;"
   results.forEach((result => {
     ResultTable.insertAdjacentHTML('afterbegin',`
     <div class="result">
@@ -35,6 +36,7 @@ function fetchFiles () {
   buttons.forEach((button) => {
     button.addEventListener('click', async (event) => {
       event.preventDefault()
+      ResultTable.style = "opacity:0;"
       const firstLength = first.files.length
       const secondLength = second.files.length
       if (!(firstLength && secondLength)) {
@@ -61,7 +63,10 @@ function fetchFiles () {
         const status = response.status;
         const data = await response.json()
         if (status === 200) {
-          showFilesResults(data, ResultTable)
+          setTimeout(() => {
+            ResultTable.innerHTML = ''
+            showFilesResults(data, ResultTable)
+          }, 300)
         }
         if (!response.ok) {
           throw new Error('Что-то пошло не так')
