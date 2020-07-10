@@ -46,9 +46,7 @@ router.post('/leven', upload.fields([{ name: 'first-folder', maxCount: 100 }, { 
         // });
         for (const file of req.files['first-folder']) {
             filePath = path.join(__dirname, '../', file.path);
-            console.log('1');
             sourcesFirst.push([file.filename, await fs.readFile(filePath, 'utf8')]);
-            console.log('2');
         }
         const sourcesSecond = new Array();
         // await req.files['second-folder'].forEach(async (file) => {
@@ -59,11 +57,8 @@ router.post('/leven', upload.fields([{ name: 'first-folder', maxCount: 100 }, { 
         // });
         for (const file of req.files['second-folder']) {
             filePath = path.join(__dirname, '../', file.path);
-            console.log('3');
             sourcesSecond.push([file.filename, await fs.readFile(filePath, 'utf8')]);
-            console.log('4');
         }
-        console.log('5');
         let results = new Array();
         // sourcesFirst.forEach((sourceFirst) => {
         //     sourcesSecond.forEach((sourceSecond) => {
@@ -90,18 +85,13 @@ router.post('/shingling', upload.fields([{ name: 'first-folder', maxCount: 100 }
         let filePath = '';
         for (const file of req.files['first-folder']) {
             filePath = path.join(__dirname, '../', file.path);
-            console.log('1');
             sourcesFirst.push([file.filename, await fs.readFile(filePath, 'utf8')]);
-            console.log('2');
         }
         const sourcesSecond = new Array();
         for (const file of req.files['second-folder']) {
             filePath = path.join(__dirname, '../', file.path);
-            console.log('3');
             sourcesSecond.push([file.filename, await fs.readFile(filePath, 'utf8')]);
-            console.log('4');
         }
-        console.log('5');
         let results = new Array();
         for (const sourceFirst of sourcesFirst) {
             for (const sourceSecond of sourcesSecond) {
