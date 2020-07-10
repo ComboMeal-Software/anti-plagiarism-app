@@ -2,11 +2,12 @@ const express = require('express');
 const router = express.Router();
 
 const multer = require('multer');
-const fs = require('fs-extra').promises;
+const fs = require('fs-extra');
 const util = require('util');
 const path = require('path');
 const leven = require('../functions/leven');
 const shingle = require('../functions/shingling');
+const { readFileSync } = require('fs-extra');
 
 const getLevenWait = util.promisify(leven.getLeven);
 
@@ -43,29 +44,32 @@ const filter = (req, file, cb) => {
     };
 };
 
-const upload = multer({ storage: storage, fileFilter: filter });
+const upload = multer({ storage: storage });
 
 router.post('/leven', upload.fields([{ name: 'first-folder', maxCount: 100 }, { name: 'second-folder', maxCount: 100 }]), async (req, res) => {
     try {
         console.log('files uploaded');
-        const sourcesFirst = new Array();
         let filePath = '';
-        for (const file of req.files['first-folder']) {
+        const sourcesFirst = req.files['first-folder'].map((file) => {
             filePath = path.join(__dirname, '../', file.path);
-            fs.readFile(filePath, 'utf8')
-            sourcesFirst.push([file.filename, await fs.readFile(filePath, 'utf8')]);
-        }
-        const sourcesSecond = new Array();
-        for (const file of req.files['second-folder']) {
+            return {
+                name: file.filename,
+                source: readFileSync(filePath, 'utf8')
+            };
+        });
+        const sourcesSecond = req.files['second-folder'].map((file) => {
             filePath = path.join(__dirname, '../', file.path);
-            sourcesSecond.push([file.filename, await fs.readFile(filePath, 'utf8')]);
-        }
-        let results = new Array();
-        for (const sourceFirst of sourcesFirst) {
-            for (const sourceSecond of sourcesSecond) {
-                results.push([sourceFirst[0], sourceSecond[0], leven.getLeven(sourceFirst[1], sourceSecond[1])]);
-            }
-        }
+            return {
+                name: file.filename,
+                source: fs.readFileSync(filePath, 'utf8')
+            };
+        })
+        let results = new Array()
+        sourcesFirst.forEach((firstFolderFiles) => {
+            sourcesSecond.forEach((secondFolderFiles) => {
+                results.push([firstFolderFiles.name, secondFolderFiles.name, leven.getLeven(firstFolderFiles.source, secondFolderFiles.source)]);
+            })
+        })
         console.table(results);
         res.send('end');
     } catch (e) {
@@ -74,29 +78,27 @@ router.post('/leven', upload.fields([{ name: 'first-folder', maxCount: 100 }, { 
     };
 });
 
-router.post('/shingling', upload.fields([{ name: 'first-folder', maxCount: 100 }, { name: 'second-folder', maxCount: 100 }]), async (req, res) => {
+router.post('/shingling', upload.fields([{ name: 'first-folder', maxCount: 100 }, { name: 'second-folder', maxCount: 100 }]), (req, res) => {
     try {
         console.log('files uploaded');
-        const sourcesFirst = new Array();
         let filePath = '';
-        for (const file of req.files['first-folder']) {
+        const sourcesFirst = req.files['first-folder'].map((file) => {
             filePath = path.join(__dirname, '../', file.path);
-            sourcesFirst.push({
+            return {
                 name: file.filename,
-                source: await fs.readFile(filePath, 'utf8')
-            });
-        }
-        const sourcesSecond = new Array();
-        for (const file of req.files['second-folder']) {
+                source: readFileSync(filePath, 'utf8')
+            };
+        });
+        const sourcesSecond = req.files['second-folder'].map((file) => {
             filePath = path.join(__dirname, '../', file.path);
-            sourcesSecond.push({
+            return {
                 name: file.filename,
-                source: await fs.readFile(filePath, 'utf8')
-            });
-        }
+                source: fs.readFileSync(filePath, 'utf8')
+            };
+        })
         let results = new Array()
-        sourceFirst.forEach((firstFolderFiles) => {
-            sourceSecond.forEach((secondFolderFiles) => {
+        sourcesFirst.forEach((firstFolderFiles) => {
+            sourcesSecond.forEach((secondFolderFiles) => {
                 results.push([firstFolderFiles.name, secondFolderFiles.name, shingle.getShingle(firstFolderFiles.source, secondFolderFiles.source)]);
             })
         })
