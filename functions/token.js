@@ -2,7 +2,7 @@ const Tokenizr = require('tokenizr');
 const c_rules = require('../tokenRules/c-tokenizer')
 
 let lexer = new Tokenizr()
-exports.getTokens = (contents) => {
+exports.getTokens = (...contents) => {
     c_rules.forEach((c_rule) => {
         lexer.rule(c_rule.regex, (ctx, match) => {
         if (c_rule.type.length) {

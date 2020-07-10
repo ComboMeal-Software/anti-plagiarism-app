@@ -2,9 +2,13 @@ const express = require('express');
 const router = express.Router();
 
 const multer = require('multer');
-const fs = require('fs');
+const fs = require('fs').promises;
+const util = require('util');
 const path = require('path');
-const token = require('../functions/token');
+const leven = require('../functions/leven');
+const shingle = require('../functions/shingling');
+
+const getLevenWait = util.promisify(leven.getLeven);
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -15,7 +19,7 @@ const storage = multer.diskStorage({
         };
     },
     filename: (req, file, cb) => {
-        cb(null, file.fieldname + '-' + file.originalname);
+        cb(null, Date.now() + '-' + file.fieldname + '-' + file.originalname);
     }
 });
 
@@ -29,24 +33,87 @@ const filter = (req, file, cb) => {
 
 const upload = multer({ storage: storage, fileFilter: filter });
 
-router.post('/leven', upload.fields([{ name: 'first-folder', maxCount: 100 }, { name: 'second-folder', maxCount: 100 }]), (req, res) => {
+router.post('/leven', upload.fields([{ name: 'first-folder', maxCount: 100 }, { name: 'second-folder', maxCount: 100 }]), async (req, res) => {
     try {
-        let sources = [];
-        req.files['first-folder'].forEach((file) => {
-            let filePath = path.join(__dirname, '../public/uploads/first-folder', file.filename)
-            fs.readFile(filePath, 'utf8', function(err, contents) {
-                console.log(filePath);
-                sources.push(contents);
-            });
-        });
-        
+        console.log('files uploaded');
+        const sourcesFirst = new Array();
+        let filePath = '';
+        // await req.files['first-folder'].forEach(async (file) => {
+        //     console.log('1');
+        //     filePath = path.join(__dirname, '../', file.path);
+        //     sourcesFirst.push(await fs.readFile(filePath, 'utf8'));
+        //     console.log('2');
+        // });
+        for (const file of req.files['first-folder']) {
+            filePath = path.join(__dirname, '../', file.path);
+            console.log('1');
+            sourcesFirst.push([file.filename, await fs.readFile(filePath, 'utf8')]);
+            console.log('2');
+        }
+        const sourcesSecond = new Array();
+        // await req.files['second-folder'].forEach(async (file) => {
+        //     console.log('3');
+        //     filePath = path.join(__dirname, '../', file.path);
+        //     sourcesSecond.push(await fs.readFile(filePath, 'utf8'));
+        //     console.log('4');
+        // });
+        for (const file of req.files['second-folder']) {
+            filePath = path.join(__dirname, '../', file.path);
+            console.log('3');
+            sourcesSecond.push([file.filename, await fs.readFile(filePath, 'utf8')]);
+            console.log('4');
+        }
+        console.log('5');
+        let results = new Array();
+        // sourcesFirst.forEach((sourceFirst) => {
+        //     sourcesSecond.forEach((sourceSecond) => {
+        //         results.push([sourceFirst[0], sourceSecond[0], leven.getLeven(sourceFirst[1], sourceSecond[1])]);
+        //     });
+        // });
+        for (const sourceFirst of sourcesFirst) {
+            for (const sourceSecond of sourcesSecond) {
+                results.push([sourceFirst[0], sourceSecond[0], leven.getLeven(sourceFirst[1], sourceSecond[1])]);
+            }
+        }
+        console.table(results);
+        res.send('end');
     } catch(e) {
+        res.status(500);
         console.log(e);
     };
 });
 
-router.post('/shingling', upload.array('files'), (req, res) => {
-
+router.post('/shingling', upload.fields([{ name: 'first-folder', maxCount: 100 }, { name: 'second-folder', maxCount: 100 }]), async (req, res) => {
+    try {
+        console.log('files uploaded');
+        const sourcesFirst = new Array();
+        let filePath = '';
+        for (const file of req.files['first-folder']) {
+            filePath = path.join(__dirname, '../', file.path);
+            console.log('1');
+            sourcesFirst.push([file.filename, await fs.readFile(filePath, 'utf8')]);
+            console.log('2');
+        }
+        const sourcesSecond = new Array();
+        for (const file of req.files['second-folder']) {
+            filePath = path.join(__dirname, '../', file.path);
+            console.log('3');
+            sourcesSecond.push([file.filename, await fs.readFile(filePath, 'utf8')]);
+            console.log('4');
+        }
+        console.log('5');
+        let results = new Array();
+        for (const sourceFirst of sourcesFirst) {
+            for (const sourceSecond of sourcesSecond) {
+                results.push([sourceFirst[0], sourceSecond[0], shingle.getShingle(sourceFirst[1], sourceSecond[1])]);
+            }
+        }
+        console.table(results);
+        res.send('end');
+    } catch(e) {
+        res.status(500);
+        console.log(e);
+    };
 });
 
 module.exports = router;

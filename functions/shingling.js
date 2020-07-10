@@ -3,9 +3,9 @@ const CRC32 = require('crc-32');
 const intersection = require('array-intersection');
 const union = require('array-union');
 
-exports.getShingle = (...contents) => {
+exports.getShingle = (first, second) => {
     shingleLength = 5;
-    const tokens = token.getTokens(contents);
+    const tokens = token.getTokens(first, second);
     let firstShingles = [];
     for (let i = 0; i + shingleLength <= tokens[0].length; i++) {
       firstShingles.push(tokens[0].substr(i, shingleLength));
