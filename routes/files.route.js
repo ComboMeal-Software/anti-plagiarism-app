@@ -8,10 +8,14 @@ const token = require('../functions/token');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'public/uploads')
+        if (file.fieldname == "first-folder") {
+            cb(null, 'public/uploads/first-folder');
+        } else {
+            cb(null, 'public/uploads/second-folder');
+        };
     },
     filename: (req, file, cb) => {
-        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+        cb(null, file.fieldname + '-' + file.originalname);
     }
 });
 
@@ -26,7 +30,7 @@ router.post('/leven', upload.any('files'), (req, res) => {
                 let {
                     firstToken,
                     secondToken,
-                  } = token.getTokens(contents, ' ');
+                  } = token.getTokens(contents);
                 console.log(firstToken);
             });
         });
