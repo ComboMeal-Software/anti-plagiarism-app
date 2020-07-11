@@ -2,9 +2,15 @@ const header = document.querySelector('.header')
 const body = document.querySelector('body')
 const theme_button = document.querySelector('.theme_button')
 const textarea = document.querySelectorAll('.form_textarea')
+const formInput = document.querySelectorAll('.form_input')
 let firstClick = 0;
 let gachiPoints = 0;
-let theme = 'dark'
+let theme = 'light'
+new InputFile({
+  buttonText: 'Выберите папки',
+  hint: 'Или перетащите папки сюда',
+  message: 'файлы выбраны'
+});
 theme_button.addEventListener('click', (event) => {
   const secondClick = Date.now()
   let speed = secondClick - firstClick;
@@ -21,9 +27,15 @@ theme_button.addEventListener('click', (event) => {
     headerText.style = 'background: -webkit-linear-gradient(315deg, #f6f0c4 0%, #d99ec9 74%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;'
     setTimeout(() => {
       gachiPoints = 0;
-      theme = 'light'
+      theme = 'dark'
       theme_button.innerText = 'Светлая тема';
-      textarea.forEach((area) => { area.classList.add('textarea_light') })
+      textarea.forEach((area) => {
+        area.parentElement.classList.add('textarea_dark')
+        area.classList.add('textarea_dark')
+      })
+      formInput.forEach((field) => {
+        field.classList.add('fileInput_dark')
+      })
       theme_button.style = 'background-color: #f9f9f9; color:#40434c;'
       header.style = 'color:#fff'
       body.style = 'background-color: #131418'
@@ -31,17 +43,29 @@ theme_button.addEventListener('click', (event) => {
       headerText.style = ''
     }, 6000)
   } else {
-    if (theme === 'light') {
-      theme = 'dark'
+    if (theme === 'dark') {
+      theme = 'light'
       theme_button.innerText = "Темная тема";
-      textarea.forEach((area) => { area.classList.remove('textarea_light') })
+      textarea.forEach((area) => {
+        area.parentElement.classList.remove('dark')
+        area.classList.remove('dark')
+      })
+      formInput.forEach((field) => {
+        field.classList.remove('dark')
+      })
       theme_button.style = "background-color: #40434c; color:#f9f9f9;"
       header.style = 'color:#222429'
       body.style = 'background-color: #40434c26'
     } else {
-      theme = 'light'
+      theme = 'dark'
       theme_button.innerText = "Светлая тема";
-      textarea.forEach((area) => { area.classList.add('textarea_light') })
+      textarea.forEach((area) => {
+        area.parentElement.classList.add('dark')
+        area.classList.add('dark')
+      })
+      formInput.forEach((field) => {
+        field.classList.add('dark')
+      })
       theme_button.style = "background-color: #f9f9f9; color:#40434c;"
       header.style = 'color:#fff'
       body.style = 'background-color: #131418'

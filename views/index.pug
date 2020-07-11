@@ -1,25 +1,46 @@
 extends layout
 
 block content
-    form(class="main" action="" method="POST")
+    form.compareFiles
+      .main
+        .form_input.fileInput.firstFileBlock
+            input.firstFileInput(type="file" name="first-folder" id="first-folder" webkitdirectory mozdirectory)
+        .button_input
+          .compare_button_block
+            button.compare_button.button(action="leven") Алгоритм Вагнера-Фишера
+            .plagiarized
+              span
+            .refreshBlock
+              i.material-icons.refresh close
+          .compare_button_block
+            button.compare_button.button(action="shingling")  W-shingling
+              .plagiarized
+                span
+              .refreshBlock
+                i.material-icons.refresh close
+        .form_input.fileInput.secondFileBlock
+          input.secondFileInput(type="file" name="second-folder" id="second-folder" webkitdirectory mozdirectory)
+      .form_input.ResultTable  
+    form(class="main compareText")
       .form_input.textareaBlock
         textarea(data-autoresize name="first" class="form_textarea" required placeholder="Введите исходный код первой программы")
-      .form_input.button_input
-        div.compare_button_block
-          button.compare_button.button#leven Алгоритм Вагнера-Фишера
-          div.plagiarized
+      .button_input
+        .compare_button_block
+          button.compare_button.button(action="leven") Алгоритм Вагнера-Фишера
+          .plagiarized
             span
-          div.refreshBlock
+          .refreshBlock
             i.material-icons.refresh close
-        div.compare_button_block
-          button.compare_button.button#shingling W-shingling
-          div.plagiarized 
+        .compare_button_block
+          button.compare_button.button(action="shingling") W-shingling
+          .plagiarized 
             span 
-          div.refreshBlock
+          .refreshBlock
             i.material-icons.refresh close
       .form_input.textareaBlock
         textarea(data-autoresize name="second" class="form_textarea" required placeholder="Введите исходный код второй программы")
-    
+    script(type="text/javascript" src="/plugins/input-file-master/input-file.min.js")
     script(type="text/javascript" src="/js/theme.js")
     script(type="text/javascript" src="/js/showResults.js")
-    script(type="text/javascript" src="/js/fetch.js")
+    script(type="text/javascript" src="/js/fetchText.js")
+    script(type="text/javascript" src="/js/fetchFiles.js")
