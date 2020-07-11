@@ -9,7 +9,7 @@ const leven = require('../functions/leven');
 const shingle = require('../functions/shingling');
 const { readFileSync } = require('fs-extra');
 
-let regex = /\s*(public|private|protected)?\s+(void|int|char|short|long|float|double)\s+(\w+)\s*\([^)]*\)\s*/;
+let regex = new RegExp(/\s*(public|private|protected)?\s+(void|int|char|short|long|float|double)\s+(\w+)\s*\([^)]*\)/, 'g');
 
 const getLevenWait = util.promisify(leven.getLeven);
 
@@ -135,8 +135,14 @@ router.post('/shingling', upload.fields([{ name: 'first-folder', maxCount: 100 }
 router.post('/express', upload.single('file'), (req, res) => {
     try {
         let filePath = path.join(__dirname, '../', req.file.path);
-        const source = readFileSync(filePath, 'utf8');
-        console.log(regex.test(source));
+        let source = readFileSync(filePath, 'utf8');
+        let match = [];
+        while ((match = regex.exec(source)) != null) {
+            console.table(match);
+            source = source.substr(match[0].length);
+        }
+        fs.remove(filePath);
+        res.send('end');
     } catch(e) {
         res.status(500);
         console.log(e);
