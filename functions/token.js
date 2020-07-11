@@ -1,5 +1,5 @@
 const Tokenizr = require('tokenizr');
-const c_rules = require('../tokenRules/c-tokenizer')
+const c_rules = require('./regex/c-tokenizer')
 
 let lexer = new Tokenizr()
 exports.getTokens = (...contents) => {
