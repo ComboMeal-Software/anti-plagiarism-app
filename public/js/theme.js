@@ -7,8 +7,8 @@ let firstClick = 0;
 let gachiPoints = 0;
 let theme = 'light'
 new InputFile({
-  buttonText: 'Выберите папки',
-  hint: 'Или перетащите папки сюда',
+  buttonText: 'Выберите папку',
+  hint: 'Или перетащите папку сюда',
   message: 'файлы выбраны'
 });
 theme_button.addEventListener('click', (event) => {
