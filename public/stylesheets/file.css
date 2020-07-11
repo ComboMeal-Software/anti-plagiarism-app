@@ -1,0 +1,74 @@
+.compareFiles{
+  min-height: 20vh;
+  border-bottom: 1px solid #848484;
+  display:flex;
+  flex-flow:column nowrap;
+  align-items: center;
+}
+.ResultTable {
+  opacity:0;
+  transition: all .3s ease-in-out;
+  width: fit-content;
+  padding:20px 20px 0px 0px;
+  max-width:90%;
+  min-width: 50%;
+  display:flex;
+  flex-flow:column nowrap;
+  justify-content: center;
+  margin-top:30px;
+  margin-bottom:30px;
+}
+.result {
+  display:flex;
+  flex-flow:row nowrap;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #e2e2e4;
+  padding-bottom: 10px;
+}
+.resultCell{
+  margin-left:20px;
+  width:30%;
+  text-align:left;
+  line-height: 32px;
+}
+.fileInput{
+  padding: 20px;
+  width:40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fileInput .inf__drop-area{
+  transition: all .3s ease-in-out;
+  border-color:#47cf73;
+  border-radius: 15px;
+  width:100%;
+  font-size:14px;
+}
+
+.fileInput .inf__btn{
+  background-color: #47cf73;
+  padding: 10px 20px;
+  border:none;
+  color: #fff;
+  border-radius: 15px;
+}
+.resultCell .plagiarized{
+  background: #ff6b6b;
+  text-align: center;
+  border-radius: inherit;
+  height: 100%;
+  min-width: 60px;
+  overflow: hidden;
+  font-size: 18px;
+  color:#fff;
+}
+.plagiarizedBlock{
+  background-color: #47cf73;
+  border-radius: 15px;;
+}
+.fileInput.error .inf__drop-area{
+  background-color: #ff6b6b;
+  color:#fff;
+}
