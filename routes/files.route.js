@@ -9,6 +9,8 @@ const leven = require('../functions/leven');
 const shingle = require('../functions/shingling');
 const { readFileSync } = require('fs-extra');
 
+let regex = /\s*(public|private|protected)?\s+(void|int|char|short|long|float|double)\s+(\w+)\s*\([^)]*\)\s*/;
+
 const getLevenWait = util.promisify(leven.getLeven);
 
 const storage = multer.diskStorage({
@@ -129,5 +131,16 @@ router.post('/shingling', upload.fields([{ name: 'first-folder', maxCount: 100 }
         console.log(e);
     };
 });
+
+router.post('/express', upload.single('file'), (req, res) => {
+    try {
+        let filePath = path.join(__dirname, '../', req.file.path);
+        const source = readFileSync(filePath, 'utf8');
+        console.log(regex.test(source));
+    } catch(e) {
+        res.status(500);
+        console.log(e);
+    };
+})
 
 module.exports = router;
