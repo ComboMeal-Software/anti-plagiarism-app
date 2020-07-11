@@ -9,7 +9,8 @@ const leven = require('../functions/leven');
 const shingle = require('../functions/shingling');
 const { readFileSync } = require('fs-extra');
 
-let regex = new RegExp(/\s*(public|private|protected)?\s+(void|int|char|short|long|float|double)\s+(\w+)\s*\([^)]*\)/, 'g');
+let regex = new RegExp(/(public|private|protected)?\s+(void|byte|bool|ushort|uint|ulong|int|char|string|short|long|float|double)\s+(\w+)\s*\([^)]*\)/);
+let regexArg = new RegExp(/(byte|bool|ushort|uint|ulong|int|char|string|short|long|float|double)\s+(\w+)/);
 
 const getLevenWait = util.promisify(leven.getLeven);
 
@@ -115,7 +116,7 @@ router.post('/shingling', upload.fields([{ name: 'first-folder', maxCount: 100 }
                 source: source
             };
         })
-        let results = new Array()
+        let results = new Array();
         sourcesFirst.forEach((firstFolderFiles) => {
             sourcesSecond.forEach((secondFolderFiles) => {
                 results.push({
@@ -137,11 +138,35 @@ router.post('/express', upload.single('file'), (req, res) => {
         let filePath = path.join(__dirname, '../', req.file.path);
         let source = readFileSync(filePath, 'utf8');
         let match = [];
+        let matchArg = [];
+        let results = new Array();
+        let args = new Array();
+        let func = "";
         while ((match = regex.exec(source)) != null) {
-            console.table(match);
-            source = source.substr(match[0].length);
+            args.length = 0;
+            func = match[0].substr(match[0].indexOf('('));
+            while ((matchArg = regexArg.exec(func)) != null) {
+                args.push({
+                    arg: matchArg[0],
+                    typeArg: matchArg[1],
+                    nameArg: matchArg[2]
+                });
+                func = func.substr(matchArg.index + matchArg[0].length);
+            }
+            results.push({
+                function: match[0],
+                access: match[1],
+                type: match[2],
+                name: match[3],
+                argsNum: args.length,
+                args: args.slice()
+            });
+            source = source.substr(match.index + match[0].length);
         }
         fs.remove(filePath);
+        console.table(results);
+        console.table(results[0].args);
+        console.table(results[1].args);
         res.send('end');
     } catch(e) {
         res.status(500);
