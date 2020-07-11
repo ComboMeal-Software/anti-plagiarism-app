@@ -3,3 +3,5 @@
 ![GitHub issues](https://img.shields.io/github/issues-raw/ComboMeal-Software/anti-plagiarism-app)
 
 Прототип системы для анализа программ на плагиат
+
+Веб-приложение: https://anti-plagiarism-app.herokuapp.com/
