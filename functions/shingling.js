@@ -24,7 +24,7 @@ exports.getShingle = (first, second) => {
       secondHash.push(CRC32.str(item));
     })
     
-    const plagiarized = intersection(firstHash, secondHash).length / union(firstHash, secondHash).length * 100;
+    const plagiarized = Math.round(intersection(firstHash, secondHash).length / union(firstHash, secondHash).length * 100);
     const result = {
       method: 'shingling',
       value: plagiarized,
