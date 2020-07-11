@@ -29,6 +29,9 @@
     "nodemon": "^2.0.4"
   },
   "description": "Прототип системы для анализа программ на плагиат",
+  "engines": {
+    "node": "14.x"
+  },
   "main": "app.js",
   "repository": {
     "type": "git",
