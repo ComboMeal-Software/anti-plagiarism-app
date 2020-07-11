@@ -14,7 +14,7 @@ function fetchText () {
       })
       const url = button.getAttribute('action');
       headers['Content-Type'] = 'application/json'
-      const response = await fetch(`http://localhost:3000/compare/${url}`, {
+      const response = await fetch(`https://anti-plagiarism-app.herokuapp.com/compare/${url}`, {
         method,
         body,
         headers
