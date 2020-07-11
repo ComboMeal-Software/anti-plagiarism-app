@@ -8,11 +8,16 @@
   resize: none;
   overflow-x: hidden;
 }
+.compareText{
+  margin-top:30px;
+  margin-bottom:30px;
+  position: relative;
+  left:5%;
+}
 .textareaBlock{
+  width:40%;
   padding: 7px 2px 5px 15px;
-  border-radius: 15px;
-  overflow: auto;
-  background-color: #fff;
+
 }
 .form_input.textareaBlock:focus-within{
   border: 1px solid #47cf73;
@@ -23,7 +28,7 @@
   border-radius: 15px;
   width: 5px;
 }
-.form_textarea.textarea_light::-webkit-scrollbar {
+.form_textarea.dark::-webkit-scrollbar {
   background:#40434C;
   border-radius: 15px;
   width:5px;
@@ -35,11 +40,12 @@
 .form_textarea::placeholder{
   color: #40434c75;
 }
-.textarea_light{
+.form_textarea.dark{
   background-color: #40434C;
   color: #fff;
 }
-.textarea_light::placeholder{
+
+.form_textarea.dark::placeholder{
   color: #ffffff94;
 }
 textarea:focus{

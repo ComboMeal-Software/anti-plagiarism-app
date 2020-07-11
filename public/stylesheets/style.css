@@ -24,20 +24,21 @@ a {
 .main{
   width: 90%;
   position: relative;
-  left: 5%;
   display: flex;
   justify-content: space-around;
-  align-items: flex-start;
+  align-items: center;
   top: 30px;
 }
-.form_input{
-  width:40%;
+
+.form_input.dark{
+  background-color: #40434C;
+  color: #fff;
 }
-.form_input.button_input{
+
+.button_input{
   text-align: center;
   width: fit-content;
   margin: auto;
-  margin-top: 5%;
 }
 
 .compare_button{
@@ -57,6 +58,11 @@ a {
   margin-bottom: 25px;
   position: relative;
   overflow: hidden;
+}
+.form_input{
+  border-radius: 15px;
+  overflow: auto;
+  background-color: #fff;
 }
 .compare_button_block .plagiarized{
   transition: all .2s ease-in-out;

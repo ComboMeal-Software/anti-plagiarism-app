@@ -5,7 +5,8 @@ const path = require('path');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index.route');
-const compareRouter = require('./routes/compare.route')
+const compareRouter = require('./routes/compare.route');
+const filesRouter = require('./routes/files.route');
 
 const app = express();
 
@@ -20,7 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/compare',  compareRouter);
-
+app.use('/files', filesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
