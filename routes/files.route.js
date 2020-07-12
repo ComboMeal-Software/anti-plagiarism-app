@@ -262,15 +262,18 @@ router.post('/express', upload.fields([{ name: 'first-folder', maxCount: 100 }, 
                 } else {
                     scoreFiles = Math.round(scoreFiles / ((fileFirst.functions.length * fileSecond.functions.length) * 100) * 100);
                 };
+                const result = {
+                    method: 'express',
+                    value: scoreFiles
+                }
                 results.push({
-                    fileFirst: fileFirst.fileName,
-                    fileSecond: fileSecond.fileName,
-                    result: scoreFiles
+                    firstFolderFile: fileFirst.fileName,
+                    secondFolderFile: fileSecond.fileName,
+                    plagiarized: result
                 });
             });
         });
-        console.table(results);
-        res.send('end');
+        res.status(200).send(results);
     } catch(e) {
         res.status(500);
         console.log(e);
