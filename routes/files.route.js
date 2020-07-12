@@ -133,45 +133,88 @@ router.post('/shingling', upload.fields([{ name: 'first-folder', maxCount: 100 }
     };
 });
 
-router.post('/express', upload.single('file'), (req, res) => {
+router.post('/express', upload.fields([{ name: 'first-folder', maxCount: 100 }, { name: 'second-folder', maxCount: 100 }]), (req, res) => {
     try {
-        let filePath = path.join(__dirname, '../', req.file.path);
-        let source = readFileSync(filePath, 'utf8');
+        let filePath = '';
         let match = [];
         let matchArg = [];
-        let results = new Array();
+        let fileRes = new Array();
         let args = new Array();
         let func = "";
-        while ((match = regex.exec(source)) != null) {
-            args.length = 0;
-            func = match[0].substr(match[0].indexOf('('));
-            while ((matchArg = regexArg.exec(func)) != null) {
-                args.push({
-                    arg: matchArg[0],
-                    typeArg: matchArg[1],
-                    nameArg: matchArg[2]
+        const resultsFirst = req.files['first-folder'].map((file) => {
+            filePath = path.join(__dirname, '../', file.path);
+            let source = readFileSync(filePath, 'utf8');
+            fileRes.length = 0;
+            while ((match = regex.exec(source)) != null) {
+                args.length = 0;
+                func = match[0].substr(match[0].indexOf('('));
+                while ((matchArg = regexArg.exec(func)) != null) {
+                    args.push({
+                        arg: matchArg[0],
+                        typeArg: matchArg[1],
+                        nameArg: matchArg[2]
+                    });
+                    func = func.substr(matchArg.index + matchArg[0].length);
+                }
+                fileRes.push({
+                    function: match[0],
+                    access: match[1],
+                    type: match[2],
+                    name: match[3],
+                    argsNum: args.length,
+                    args: args.slice()
                 });
-                func = func.substr(matchArg.index + matchArg[0].length);
-            }
-            results.push({
-                function: match[0],
-                access: match[1],
-                type: match[2],
-                name: match[3],
-                argsNum: args.length,
-                args: args.slice()
-            });
-            source = source.substr(match.index + match[0].length);
-        }
-        fs.remove(filePath);
-        console.table(results);
-        console.table(results[0].args);
-        console.table(results[1].args);
+                source = source.substr(match.index + match[0].length);
+            };
+            fs.remove(filePath);            
+            return {
+                fileName: file.filename,
+                result: fileRes.slice()
+            };
+        });
+        const resultsSecond = req.files['second-folder'].map((file) => {
+            filePath = path.join(__dirname, '../', file.path);
+            let source = readFileSync(filePath, 'utf8');
+            fileRes.length = 0;
+            while ((match = regex.exec(source)) != null) {
+                args.length = 0;
+                func = match[0].substr(match[0].indexOf('('));
+                while ((matchArg = regexArg.exec(func)) != null) {
+                    args.push({
+                        arg: matchArg[0],
+                        typeArg: matchArg[1],
+                        nameArg: matchArg[2]
+                    });
+                    func = func.substr(matchArg.index + matchArg[0].length);
+                }
+                fileRes.push({
+                    function: match[0],
+                    access: match[1],
+                    type: match[2],
+                    name: match[3],
+                    argsNum: args.length,
+                    args: args.slice()
+                });
+                source = source.substr(match.index + match[0].length);
+            };
+            fs.remove(filePath);            
+            return {
+                fileName: file.filename,
+                result: fileRes.slice()
+            };
+        });
+        console.table(resultsFirst);
+        console.table(resultsFirst[0].result);
+        console.table(resultsFirst[0].result[0].args);
+        console.table(resultsSecond);
+        console.table(resultsSecond[0].result);
+        console.table(resultsSecond[0].result[1].args);
+
         res.send('end');
     } catch(e) {
         res.status(500);
         console.log(e);
     };
-})
+});
 
 module.exports = router;
