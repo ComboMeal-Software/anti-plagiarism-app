@@ -2,7 +2,7 @@
 #include <cstdlib>
 using namespace std;
 // sort array function
-void bubble(int* arr, int size)
+public void bubble(int arr, int size)
 {
 for (int i = size - 1; i >= 0; i--)
 {
