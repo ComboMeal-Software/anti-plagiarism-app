@@ -214,12 +214,6 @@ router.post('/express', upload.fields([{ name: 'first-folder', maxCount: 100 }, 
                 };
             };
         });
-        // console.table(filesFirst);
-        // console.table(filesFirst[0].functions);
-        // console.table(filesFirst[0].functions[0].args);
-        // console.table(filesSecond);
-        // console.table(filesSecond[0].functions);
-        // console.table(filesSecond[0].functions[1].args);
         let results = new Array();
         filesFirst.forEach((fileFirst) => {
             filesSecond.forEach((fileSecond) => {
@@ -227,11 +221,6 @@ router.post('/express', upload.fields([{ name: 'first-folder', maxCount: 100 }, 
                 fileFirst.functions.forEach((functionFirst) => {
                     fileSecond.functions.forEach((functionSecond) => {
                         let scoreFunc = 0;
-                        /*
-                        access - 10
-                        type - 20
-                        argsNum - 30
-                        */
                         if (functionFirst.access === functionSecond.access) {
                             scoreFunc += 10;
                         };

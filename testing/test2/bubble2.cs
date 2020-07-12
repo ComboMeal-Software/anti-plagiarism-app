@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 using namespace std;
-void bubbleSort(double* a, int n)
+public void bubbleSort(double a, int n)
 {
 int index1 = n-1;
 while (index1 >= 0)

@@ -1,0 +1,9 @@
+
+public int max(int x, int x, bool test)
+{
+	otdihaem pacani;
+};
+
+private void min(double x, double xxx) {
+	vot tak bivaet esho;
+};
