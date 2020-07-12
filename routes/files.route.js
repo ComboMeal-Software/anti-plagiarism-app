@@ -115,7 +115,7 @@ router.post('/shingling', upload.fields([{ name: 'first-folder', maxCount: 100 }
                 name: file.filename,
                 source: source
             };
-        })
+        });
         let results = new Array();
         sourcesFirst.forEach((firstFolderFiles) => {
             sourcesSecond.forEach((secondFolderFiles) => {
@@ -125,7 +125,7 @@ router.post('/shingling', upload.fields([{ name: 'first-folder', maxCount: 100 }
                     plagiarized: shingle.getShingle(firstFolderFiles.source, secondFolderFiles.source)
                 });
             })
-        })
+        });
         res.status(200).send(results);
     } catch (e) {
         res.status(500);
@@ -141,11 +141,13 @@ router.post('/express', upload.fields([{ name: 'first-folder', maxCount: 100 }, 
         let fileRes = new Array();
         let args = new Array();
         let func = "";
-        const resultsFirst = req.files['first-folder'].map((file) => {
+        const filesFirst = req.files['first-folder'].map((file) => {
             filePath = path.join(__dirname, '../', file.path);
             let source = readFileSync(filePath, 'utf8');
             fileRes.length = 0;
+            let hasFuncs = 0;
             while ((match = regex.exec(source)) != null) {
+                hasFuncs = 1;
                 args.length = 0;
                 func = match[0].substr(match[0].indexOf('('));
                 while ((matchArg = regexArg.exec(func)) != null) {
@@ -169,14 +171,16 @@ router.post('/express', upload.fields([{ name: 'first-folder', maxCount: 100 }, 
             fs.remove(filePath);            
             return {
                 fileName: file.filename,
-                result: fileRes.slice()
+                functions: fileRes.slice()
             };
         });
-        const resultsSecond = req.files['second-folder'].map((file) => {
+        const filesSecond = req.files['second-folder'].map((file) => {
             filePath = path.join(__dirname, '../', file.path);
             let source = readFileSync(filePath, 'utf8');
             fileRes.length = 0;
+            let hasFuncs = 0;
             while ((match = regex.exec(source)) != null) {
+                hasFuncs = 1;
                 args.length = 0;
                 func = match[0].substr(match[0].indexOf('('));
                 while ((matchArg = regexArg.exec(func)) != null) {
@@ -197,19 +201,71 @@ router.post('/express', upload.fields([{ name: 'first-folder', maxCount: 100 }, 
                 });
                 source = source.substr(match.index + match[0].length);
             };
-            fs.remove(filePath);            
-            return {
-                fileName: file.filename,
-                result: fileRes.slice()
+            fs.remove(filePath);
+            if (hasFuncs === 0) {
+                return {
+                    fileName: file.filename,
+                    functions: []
+                };
+            } else {
+                return {
+                    fileName: file.filename,
+                    functions: fileRes.slice()
+                };
             };
         });
-        console.table(resultsFirst);
-        console.table(resultsFirst[0].result);
-        console.table(resultsFirst[0].result[0].args);
-        console.table(resultsSecond);
-        console.table(resultsSecond[0].result);
-        console.table(resultsSecond[0].result[1].args);
+        // console.table(filesFirst);
+        // console.table(filesFirst[0].functions);
+        // console.table(filesFirst[0].functions[0].args);
+        // console.table(filesSecond);
+        // console.table(filesSecond[0].functions);
+        // console.table(filesSecond[0].functions[1].args);
+        let results = new Array();
+        filesFirst.forEach((fileFirst) => {
+            filesSecond.forEach((fileSecond) => {
+                let scoreFiles = 0;
+                fileFirst.functions.forEach((functionFirst) => {
+                    fileSecond.functions.forEach((functionSecond) => {
+                        let scoreFunc = 0;
+                        /*
+                        access - 10
+                        type - 20
+                        argsNum - 30
+                        */
+                        if (functionFirst.access === functionSecond.access) {
+                            scoreFunc += 10;
+                        };
+                        if (functionFirst.type === functionSecond.type) {
+                            scoreFunc += 20;
+                        };
+                        let scoreArg = 0;
+                        if (functionFirst.argsNum === functionSecond.argsNum) {
+                            scoreFunc += 30;
+                            functionFirst.args.forEach((argFirst) => {
+                                try {
+                                    functionSecond.args.forEach((argSecond) => {
+                                        if (argFirst.typeArg === argSecond.typeArg) {
+                                            scoreArg += 2;
+                                            throw BreakException;
+                                        };
+                                    });
+                                } catch(e) {
 
+                                };
+                            });
+                        };
+                        scoreFiles += (scoreFunc + (scoreArg / (functionFirst.args.length + functionSecond.args.length) * 40));
+                    });
+                });
+                scoreFiles = Math.round(scoreFiles / ((fileFirst.functions.length + fileFirst.functions.length) * 50) * 100);
+                results.push({
+                    fileFirst: fileFirst.fileName,
+                    fileSecond: fileSecond.fileName,
+                    result: scoreFiles
+                });
+            });
+        });
+        console.table(results);
         res.send('end');
     } catch(e) {
         res.status(500);
