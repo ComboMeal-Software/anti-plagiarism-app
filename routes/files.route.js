@@ -9,7 +9,7 @@ const leven = require('../functions/leven');
 const shingle = require('../functions/shingling');
 const { readFileSync } = require('fs-extra');
 
-let regex = new RegExp(/(public|private|protected)?\s+(void|byte|bool|ushort|uint|ulong|int|char|string|short|long|float|double)\s+(\w+)\s*\([^)]*\)/);
+let regex = new RegExp(/(public|private|protected)\s+(void|byte|bool|ushort|uint|ulong|int|char|string|short|long|float|double)\s+(?!main|Main)(\w+)\s*\([^)]*\)/);
 let regexArg = new RegExp(/(byte|bool|ushort|uint|ulong|int|char|string|short|long|float|double)\s+(\w+)/);
 
 const getLevenWait = util.promisify(leven.getLeven);
@@ -239,25 +239,29 @@ router.post('/express', upload.fields([{ name: 'first-folder', maxCount: 100 }, 
                             scoreFunc += 20;
                         };
                         let scoreArg = 0;
-                        if (functionFirst.argsNum === functionSecond.argsNum) {
+                        if (functionFirst.argsNum === functionSecond.argsNum && functionFirst.argsNum !== 0) {
                             scoreFunc += 30;
                             functionFirst.args.forEach((argFirst) => {
-                                try {
                                     functionSecond.args.forEach((argSecond) => {
                                         if (argFirst.typeArg === argSecond.typeArg) {
-                                            scoreArg += 2;
-                                            throw BreakException;
+                                            scoreArg += 1;
                                         };
                                     });
-                                } catch(e) {
-
-                                };
                             });
                         };
-                        scoreFiles += (scoreFunc + (scoreArg / (functionFirst.args.length + functionSecond.args.length) * 40));
+                        if (Math.min(functionFirst.args.length, functionSecond.args.length) === 0) {
+                            scoreFiles += scoreFunc;
+                        } else {
+                            scoreFiles += (scoreFunc + (scoreArg / (functionFirst.args.length * functionSecond.args.length) * 40));
+                        };
+                        
                     });
                 });
-                scoreFiles = Math.round(scoreFiles / ((fileFirst.functions.length + fileFirst.functions.length) * 50) * 100);
+                if (Math.min(fileFirst.functions.length, fileSecond.functions.length) === 0) {
+                    scoreFiles = 0;
+                } else {
+                    scoreFiles = Math.round(scoreFiles / ((fileFirst.functions.length * fileSecond.functions.length) * 100) * 100);
+                };
                 results.push({
                     fileFirst: fileFirst.fileName,
                     fileSecond: fileSecond.fileName,
