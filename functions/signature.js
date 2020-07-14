@@ -66,18 +66,25 @@ exports.analyzeSignatures = (filesFirst, filesSecond) => {
                     let scoreArg = 0;
                     if (functionFirst.argsNum === functionSecond.argsNum && functionFirst.argsNum !== 0) {
                         scoreTemp += 30;
+                        let secondArgsTemp = functionSecond.args.slice();
                         functionFirst.args.forEach((argFirst) => {
-                                functionSecond.args.forEach((argSecond) => {
+                            try {
+                                secondArgsTemp.forEach((argSecond) => {
                                     if (argFirst.typeArg === argSecond.typeArg) {
                                         scoreArg += 1;
+                                        secondArgsTemp.splice(secondArgsTemp.indexOf(argSecond), 1);
+                                        throw breakException
                                     };
                                 });
+                            } catch(e) {
+
+                            }
                         });
                     };
                     if (Math.min(functionFirst.args.length, functionSecond.args.length) === 0) {
                         scoresTemp.push(scoreTemp);
                     } else {
-                        scoresTemp.push((scoreTemp + (scoreArg / (functionFirst.args.length * functionSecond.args.length) * 40)));
+                        scoresTemp.push((scoreTemp + (scoreArg / (Math.min(functionFirst.args.length, functionSecond.args.length)) * 40)));
                     };
                 });
                 scoreFiles += Math.max.apply(Math, scoresTemp);
