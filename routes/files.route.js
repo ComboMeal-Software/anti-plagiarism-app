@@ -50,28 +50,8 @@ const upload = multer({ storage: storage, fileFilter: filter });
 router.post('/leven', upload.fields([{ name: 'first-folder', maxCount: 100 }, { name: 'second-folder', maxCount: 100 }]), (req, res) => {
     try {
         let filePath = '';
-        const sourcesFirst = req.files['first-folder'].map((file) => {
-            filePath = path.join(__dirname, '../', file.path);
-            const source = readFileSync(filePath, 'utf8');
-            fs.remove(filePath, err => {
-                if (err) return console.error(err);
-              })
-            return {
-                name: file.filename,
-                source: source
-            };
-        });
-        const sourcesSecond = req.files['second-folder'].map((file) => {
-            filePath = path.join(__dirname, '../', file.path);
-            const source = readFileSync(filePath, 'utf8');
-            fs.remove(filePath, err => {
-                if (err) return console.error(err);
-              })
-            return {
-                name: file.filename,
-                source: source
-            };
-        })
+        const sourcesFirst = getSources(req.files, 'first-folder');
+        const sourcesSecond = getSources(req.files, 'second-folder');
         let results = new Array()
         sourcesFirst.forEach((firstFolderFiles) => {
             sourcesSecond.forEach((secondFolderFiles) => {
@@ -92,28 +72,8 @@ router.post('/leven', upload.fields([{ name: 'first-folder', maxCount: 100 }, { 
 router.post('/shingling', upload.fields([{ name: 'first-folder', maxCount: 100 }, { name: 'second-folder', maxCount: 100 }]), (req, res) => {
     try {
         let filePath = '';
-        const sourcesFirst = req.files['first-folder'].map((file) => {
-            filePath = path.join(__dirname, '../', file.path);
-            const source = readFileSync(filePath, 'utf8');
-            fs.remove(filePath, err => {
-                if (err) return console.error(err);
-              })
-            return {
-                name: file.filename,
-                source: source
-            };
-        });
-        const sourcesSecond = req.files['second-folder'].map((file) => {
-            filePath = path.join(__dirname, '../', file.path);
-            const source = readFileSync(filePath, 'utf8');
-            fs.remove(filePath, err => {
-                if (err) return console.error(err);
-              })
-            return {
-                name: file.filename,
-                source: source
-            };
-        });
+        const sourcesFirst = getSources(req.files, 'first-folder');
+        const sourcesSecond = getSources(req.files, 'second-folder');
         let results = new Array();
         sourcesFirst.forEach((firstFolderFiles) => {
             sourcesSecond.forEach((secondFolderFiles) => {
@@ -142,5 +102,19 @@ router.post('/express', upload.fields([{ name: 'first-folder', maxCount: 100 }, 
         console.log(e);
     };
 });
+
+getSources = (files, folder) => {
+    return files[folder].map((file) => {
+        filePath = path.join(__dirname, '../', file.path);
+        const source = readFileSync(filePath, 'utf8');
+        fs.remove(filePath, err => {
+            if (err) return console.error(err);
+          })
+        return {
+            name: file.filename,
+            source: source
+        };
+    });
+};
 
 module.exports = router;
