@@ -52,18 +52,20 @@ exports.analyzeSignatures = (filesFirst, filesSecond) => {
     filesFirst.forEach((fileFirst) => {
         filesSecond.forEach((fileSecond) => {
             let scoreFiles = 0;
+            
             fileFirst.functions.forEach((functionFirst) => {
+                let scoresTemp = new Array();
                 fileSecond.functions.forEach((functionSecond) => {
-                    let scoreFunc = 0;
+                    let scoreTemp = 0;
                     if (functionFirst.access === functionSecond.access) {
-                        scoreFunc += 10;
+                        scoreTemp += 10;
                     };
                     if (functionFirst.type === functionSecond.type) {
-                        scoreFunc += 20;
+                        scoreTemp += 20;
                     };
                     let scoreArg = 0;
                     if (functionFirst.argsNum === functionSecond.argsNum && functionFirst.argsNum !== 0) {
-                        scoreFunc += 30;
+                        scoreTemp += 30;
                         functionFirst.args.forEach((argFirst) => {
                                 functionSecond.args.forEach((argSecond) => {
                                     if (argFirst.typeArg === argSecond.typeArg) {
@@ -73,17 +75,17 @@ exports.analyzeSignatures = (filesFirst, filesSecond) => {
                         });
                     };
                     if (Math.min(functionFirst.args.length, functionSecond.args.length) === 0) {
-                        scoreFiles += scoreFunc;
+                        scoresTemp.push(scoreTemp);
                     } else {
-                        scoreFiles += (scoreFunc + (scoreArg / (functionFirst.args.length * functionSecond.args.length) * 40));
+                        scoresTemp.push((scoreTemp + (scoreArg / (functionFirst.args.length * functionSecond.args.length) * 40)));
                     };
-                    
                 });
+                scoreFiles += Math.max.apply(Math, scoresTemp);
             });
             if (Math.min(fileFirst.functions.length, fileSecond.functions.length) === 0) {
                 scoreFiles = 0;
             } else {
-                scoreFiles = Math.round(scoreFiles / ((fileFirst.functions.length * fileSecond.functions.length) * 100) * 100);
+                scoreFiles = Math.round(scoreFiles / ((Math.max(fileFirst.functions.length, fileSecond.functions.length)) * 100) * 100);
             };
             const result = {
                 method: 'express',
