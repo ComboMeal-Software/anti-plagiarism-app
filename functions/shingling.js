@@ -4,11 +4,12 @@ const intersection = require('array-intersection');
 const union = require('array-union');
 
 exports.getShingle = (first, second) => {
-    shingleLength = 5;
+    shingleLength = 4;
     const tokens = token.getTokens(first, second);
     let firstShingles = [];
     for (let i = 0; i + shingleLength <= tokens[0].length; i++) {
-      firstShingles.push(tokens[0].substr(i, shingleLength));
+      if (firstShingles.indexOf(tokens[0].substr(i, shingleLength)) == -1)
+        firstShingles.push(tokens[0].substr(i, shingleLength));
     }
     let firstHash = [];
     firstShingles.forEach(function(item, i, arr) {
@@ -17,7 +18,8 @@ exports.getShingle = (first, second) => {
 
     let secondShingles = [];
     for (let i = 0; i + shingleLength <= tokens[1].length; i++) {
-      secondShingles.push(tokens[1].substr(i, shingleLength));
+      if (secondShingles.indexOf(tokens[1].substr(i, shingleLength)) == -1)
+        secondShingles.push(tokens[1].substr(i, shingleLength));
     }
     let secondHash = [];
     secondShingles.forEach(function(item, i, arr) {
