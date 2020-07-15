@@ -1,9 +1,7 @@
-const leven = require('leven');
 const token = require('./token')
 
 exports.getLeven = (first, second) => {
   const tokens = token.getTokens(first, second);
-  //const Diff = leven(tokens[0], tokens[1]);
   const Diff = algVagnerFisher(tokens[0], tokens[1]);
   const plagiarized = Math.round((1 - Diff / (Math.max(tokens[0].length, tokens[1].length))) * 100);
   const result = {
@@ -16,8 +14,8 @@ exports.getLeven = (first, second) => {
 function algVagnerFisher(first, second) {
   let n = first.length;
   let m = second.length;
-  if (n == 0 || m == 0)
-    return 0;
+  if (n == 0) return m;
+  if (m == 0) return n;
   let table = [];
   let firstRow = [];
   for (i = 0; i <= n; i++){
