@@ -25,7 +25,7 @@
   "devDependencies": {
     "nodemon": "^2.0.4"
   },
-  "description": "Прототип системы для анализа программ на плагиат",
+  "description": "A prototype for an app to analyze source code for plagiarism",
   "engines": {
     "node": "14.x"
   },

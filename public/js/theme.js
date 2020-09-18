@@ -7,9 +7,9 @@ let firstClick = 0;
 let gachiPoints = 0;
 let theme = 'light'
 new InputFile({
-  buttonText: 'Выберите папку',
-  hint: 'Или перетащите папку сюда',
-  message: 'файлы выбраны'
+  buttonText: 'Select a folder',
+  hint: 'Or just drag it here',
+  message: 'Files selected'
 });
 theme_button.addEventListener('click', (event) => {
   const secondClick = Date.now()
@@ -28,7 +28,7 @@ theme_button.addEventListener('click', (event) => {
     setTimeout(() => {
       gachiPoints = 0;
       theme = 'dark'
-      theme_button.innerText = 'Светлая тема';
+      theme_button.innerText = 'Light theme';
       textarea.forEach((area) => {
         area.parentElement.classList.add('textarea_dark')
         area.classList.add('textarea_dark')
@@ -39,13 +39,13 @@ theme_button.addEventListener('click', (event) => {
       theme_button.style = 'background-color: #f9f9f9; color:#40434c;'
       header.style = 'color:#fff'
       body.style = 'background-color: #131418'
-      headerText.innerText = 'Прототип системы проверки исходного кода программ на плагиат'
+      headerText.innerText = 'A prototype of a system for checking the source code for plagiarism'
       headerText.style = ''
     }, 6000)
   } else {
     if (theme === 'dark') {
       theme = 'light'
-      theme_button.innerText = "Темная тема";
+      theme_button.innerText = "Dark theme";
       textarea.forEach((area) => {
         area.parentElement.classList.remove('dark')
         area.classList.remove('dark')
@@ -58,7 +58,7 @@ theme_button.addEventListener('click', (event) => {
       body.style = 'background-color: #40434c26'
     } else {
       theme = 'dark'
-      theme_button.innerText = "Светлая тема";
+      theme_button.innerText = "Light theme";
       textarea.forEach((area) => {
         area.parentElement.classList.add('dark')
         area.classList.add('dark')
