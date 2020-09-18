@@ -11,7 +11,7 @@ https://anti-plagiarism-app.herokuapp.com/
 # Credits
 [DonTsipa](https://github.com/DonTsipa) - Front-end development
 
-[GoldSwanGH](https://github.com/GoldSwanGH) and [ThomasMiles](https://github.com/RealThomasMiles) - Back-end development
+[ThomasMiles](https://github.com/RealThomasMiles) and [GoldSwanGH](https://github.com/GoldSwanGH) - Back-end development
 
 [ThomasMiles](https://github.com/RealThomasMiles) - Project management
 
