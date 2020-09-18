@@ -7,19 +7,19 @@ block content
             input.firstFileInput(type="file" name="first-folder" id="first-folder" webkitdirectory mozdirectory)
         .button_input
           .compare_button_block
-            button.compare_button.button(action="leven") Алгоритм Вагнера-Фишера
+            button.compare_button.button(action="leven") Wagner-Fischer algorithm
             .plagiarized
               span
             .refreshBlock
               i.material-icons.refresh close
           .compare_button_block
-            button.compare_button.button(action="shingling")  W-shingling
+            button.compare_button.button(action="shingling") W-shingling algorithm
               .plagiarized
                 span
               .refreshBlock
                 i.material-icons.refresh close
           .compare_button_block
-            button.compare_button.button(action="express") Сравнить сигнатуры функций
+            button.compare_button.button(action="express") Compare function signatures
             .plagiarized
               span
             .refreshBlock
@@ -29,22 +29,22 @@ block content
       .form_input.ResultTable  
     form(class="main compareText")
       .form_input.textareaBlock
-        textarea(data-autoresize name="first" class="form_textarea" required placeholder="Введите исходный код первой программы")
+        textarea(data-autoresize name="first" class="form_textarea" required placeholder="Enter the source code of the first program")
       .button_input
         .compare_button_block
-          button.compare_button.button(action="leven") Алгоритм Вагнера-Фишера
+          button.compare_button.button(action="leven") Wagner-Fischer algorithm
           .plagiarized
             span
           .refreshBlock
             i.material-icons.refresh close
         .compare_button_block
-          button.compare_button.button(action="shingling") W-shingling
+          button.compare_button.button(action="shingling") W-shingling algorithm
           .plagiarized 
             span 
           .refreshBlock
             i.material-icons.refresh close
       .form_input.textareaBlock
-        textarea(data-autoresize name="second" class="form_textarea" required placeholder="Введите исходный код второй программы")
+        textarea(data-autoresize name="second" class="form_textarea" required placeholder="Enter the source code of the second program")
     script(type="text/javascript" src="/plugins/input-file-master/input-file.min.js")
     script(type="text/javascript" src="/js/theme.js")
     script(type="text/javascript" src="/js/showResults.js")

@@ -25,7 +25,7 @@ function fetchText () {
         showResults(button.parentElement, data.result.value)
       }
       if (!response.ok) {
-        throw new Error('Что-то пошло не так')
+        throw new Error('Something went wrong')
       }
     })
     const block = button.parentElement
