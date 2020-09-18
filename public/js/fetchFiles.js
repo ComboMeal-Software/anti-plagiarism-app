@@ -23,7 +23,6 @@ function fetchFiles () {
   const compareFiles = document.querySelector('.compareFiles')
   const ResultTable = compareFiles.querySelector('.ResultTable')
   const buttons = compareFiles.querySelectorAll('.compare_button')
-  const fileInputs = compareFiles.querySelectorAll('.fileInput')
   const first = compareFiles.querySelector('.firstFileInput')
   const firstBlock = compareFiles.querySelector('.firstFileBlock')
   const second = compareFiles.querySelector('.secondFileInput')
@@ -69,8 +68,7 @@ function fetchFiles () {
           }, 300)
         }
         if (!response.ok) {
-          throw new Error('Что-то пошло не так')
-        } else {
+          throw new Error('Something went wrong')
         }
       }
     })
