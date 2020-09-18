@@ -2,8 +2,7 @@
 
 It's a prototype for an app to analyze source code for plagiarism
 
-![David](https://img.shields.io/david/ComboMeal-Software/anti-plagiarism-app)
-![GitHub issues](https://img.shields.io/github/issues-raw/ComboMeal-Software/anti-plagiarism-app)
+![Screenshot](https://raw.githubusercontent.com/ComboMeal-Software/anti-plagiarism-app/master-ru/screenshot-ru.png)
 
 # App deployed
 https://anti-plagiarism-app.herokuapp.com/
