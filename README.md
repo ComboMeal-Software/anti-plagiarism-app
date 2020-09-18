@@ -1,11 +1,11 @@
-# anti-plagiarism-app
+# anti-plagiarism-app prototype by ComboMeal Software
 
-Прототип системы для анализа программ на плагиат
+It's a prototype for an app to analyze source code for plagiarism
 
 ![David](https://img.shields.io/david/ComboMeal-Software/anti-plagiarism-app)
 ![GitHub issues](https://img.shields.io/github/issues-raw/ComboMeal-Software/anti-plagiarism-app)
 
-Веб-приложение: https://anti-plagiarism-app.herokuapp.com/
+App deployed: https://anti-plagiarism-app.herokuapp.com/
 
 
 ## License
