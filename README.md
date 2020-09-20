@@ -1,6 +1,6 @@
 # anti-plagiarism-app prototype by ComboMeal Software
 
-It's a prototype for an app to analyze source code for plagiarism
+It's a prototype for an app to analyze source code for plagiarism. The analyzation is done by tokenizing source code and then analyzing tokens with W-Shingling and / or calculating the Levenshtein distance using the Wagner–Fischer algorithm. (There's also an experimental function that uses function signatures)
 
 ![Screenshot](https://raw.githubusercontent.com/ComboMeal-Software/anti-plagiarism-app/master/screenshot.png)
 
