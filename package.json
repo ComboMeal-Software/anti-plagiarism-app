@@ -20,7 +20,7 @@
     "morgan": "~1.10.0",
     "multer": "^1.4.2",
     "pug": "^3.0.0",
-    "tokenizr": "^1.5.7"
+    "tokenizr": "^1.6.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
