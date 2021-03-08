@@ -19,7 +19,7 @@
     "leven": "^3.1.0",
     "morgan": "~1.10.0",
     "multer": "^1.4.2",
-    "pug": "^3.0.1",
+    "pug": "^3.0.2",
     "tokenizr": "^1.6.4"
   },
   "devDependencies": {
