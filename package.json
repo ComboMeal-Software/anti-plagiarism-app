@@ -23,7 +23,7 @@
     "tokenizr": "^1.6.4"
   },
   "devDependencies": {
-    "nodemon": "^2.0.8"
+    "nodemon": "^2.0.9"
   },
   "description": "A prototype for an app to analyze source code for plagiarism",
   "engines": {
