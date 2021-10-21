@@ -9,7 +9,7 @@
   "dependencies": {
     "array-intersection": "^0.1.2",
     "array-union": "^3.0.1",
-    "clean-css": "^5.2.0",
+    "clean-css": "^5.2.2",
     "cookie-parser": "~1.4.4",
     "crc-32": "^1.2.0",
     "debug": "~4.3.2",
