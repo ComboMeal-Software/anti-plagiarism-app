@@ -20,10 +20,10 @@
     "morgan": "~1.10.0",
     "multer": "^1.4.2",
     "pug": "^3.0.2",
-    "tokenizr": "^1.6.4"
+    "tokenizr": "^1.6.5"
   },
   "devDependencies": {
-    "nodemon": "^2.0.13"
+    "nodemon": "^2.0.15"
   },
   "description": "A prototype for an app to analyze source code for plagiarism",
   "engines": {
